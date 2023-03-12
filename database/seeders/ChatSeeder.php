@@ -16,14 +16,10 @@ class ChatSeeder extends Seeder
      */
     public function run(): void
     {
-        Chat::factory()->count(3)->create();
-
         $users = User::all();
-        $chats = Chat::all();
-
-        foreach ($chats as $chat) {
-            $chat->users()->attach($users->random(2));
-        }
+        Chat::factory()->count(1)->hasAttached($users->random(2))->create();        
+        Chat::factory()->count(1)->hasAttached($users->random(2))->create();        
+        Chat::factory()->count(1)->hasAttached($users->random(2))->create();        
 
         $knownChat = Chat::create([
             'name' => 'Known Chat',

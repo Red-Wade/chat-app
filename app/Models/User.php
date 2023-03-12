@@ -45,6 +45,6 @@ class User extends Authenticatable
 
     public function chats()
     {
-        return $this->belongsToMany(Chat::class, 'users_chats');
+        return $this->belongsToMany(Chat::class, 'users_chats')->withTimestamps();;
     }
 }
