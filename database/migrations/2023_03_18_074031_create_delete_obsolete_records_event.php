@@ -15,7 +15,7 @@ return new class extends Migration
          */
         DB::unprepared('CREATE EVENT delete_obsolete_records
         ON SCHEDULE
-        EVERY 30 DAY
+        EVERY 1 DAY
         STARTS CURRENT_TIMESTAMP
         ON COMPLETION PRESERVE
         DO
