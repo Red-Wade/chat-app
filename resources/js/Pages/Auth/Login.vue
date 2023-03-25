@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import Checkbox from '@/Components/Checkbox.vue'
 import GuestLayout from '@/Layouts/GuestLayout.vue'
@@ -9,17 +10,21 @@ import { Head, Link, useForm } from '@inertiajs/vue3'
 
 defineProps({
   canResetPassword: Boolean,
-  status: String
+  status: {
+    type: String,
+    default: null
+  }
 })
 
 const form = useForm({
-  email: '',
+  username: '',
   password: '',
   remember: false
 })
 
 const submit = () => {
-  form.post(route('login'), {
+  // eslint-disable-next-line no-undef
+  form.post(route('login.authenticate'), {
     onFinish: () => form.reset('password')
   })
 }
@@ -29,27 +34,28 @@ const submit = () => {
   <div class="relative flex justify-center items-center min-h-screen bg-center bg-gray-100 dark:bg-gray-900">
     <GuestLayout>
       <Head title="Log in" />
-
       <div
         v-if="status"
         class="mb-4 font-medium text-sm text-green-600"
       >
         {{ status }}
       </div>
-
       <form @submit.prevent="submit">
+        <InputError
+          :message="$page.props.errors.username"
+          class="text-center"
+        />
         <div>
           <InputLabel
-            for="email"
-            value="Email"
+            for="username"
+            value="Username"
           />
 
           <TextInput
-            id="email"
-            v-model="form.email"
-            type="email"
+            id="username"
+            v-model="form.username"
+            type="text"
             class="mt-1 block w-full"
-            required
             autofocus
             autocomplete="username"
           />
