@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SecureAuth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Auth\LoginRequest;
 
 use App\Http\Controllers\Controller;
 
@@ -15,16 +15,14 @@ use App\Http\Controllers\Controller;
  */
 class LoginController extends Controller
 {
-    public function authenticate(Request $request) {
-        $credentials = $request->validate([
-            'username' => 'required|email',
-            'password' => 'required'
-        ]);
-
+    public function authenticate(LoginRequest $request) {
+        $credentials = $request->validated();
         if (Auth::attempt($credentials)) {
             // Authentication passed...
-            dd($request);
             return redirect()->intended('dashboard');
+        } else {
+            // Return with form error
+            return redirect()->back()->withInput()->withErrors(['username' => 'Invalid username or password']);
         }
 
     }
