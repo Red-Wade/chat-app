@@ -5,6 +5,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\SecureAuth\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +26,8 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
