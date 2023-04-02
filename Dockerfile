@@ -25,6 +25,7 @@ COPY . .
 # Instalar dependencias y compilar assets
 RUN composer install
 RUN composer require laravel/octane spiral/roadrunner
+COPY .env.example .env
 RUN npm install 
 RUN npm run build
 
