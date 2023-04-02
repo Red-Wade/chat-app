@@ -35,4 +35,4 @@ RUN php artisan octane:install --server="swoole"
 
 # Iniciar servidor Octane
 CMD php artisan octane:start --server="swoole" --host="0.0.0.0" 
-EXPOSE 8000 443 80
+EXPOSE 8000
