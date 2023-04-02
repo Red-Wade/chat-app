@@ -24,10 +24,10 @@ COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
 WORKDIR /app
 COPY . .
 
-
+COPY .env.example .env
 RUN composer install
 RUN composer require laravel/octane spiral/roadrunner
-COPY .env.example .env
+
 RUN npm install 
 
 RUN npm run build
