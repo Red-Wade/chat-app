@@ -20,11 +20,12 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
 
 WORKDIR /app
-COPY . .
+COPY . . 
 
 # Instalar dependencias y compilar assets
 RUN composer install
 RUN composer require laravel/octane spiral/roadrunner
+COPY .env.example .env
 RUN npm install 
 RUN npm run build
 
@@ -34,4 +35,4 @@ RUN php artisan octane:install --server="swoole"
 
 # Iniciar servidor Octane
 CMD php artisan octane:start --server="swoole" --host="0.0.0.0" 
-EXPOSE 8000
+EXPOSE 8000 443 80
