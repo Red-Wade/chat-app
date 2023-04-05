@@ -12,6 +12,7 @@ defineProps({
     <div>
         <Link id="inicio" to="/" href="/">
         <ApplicationLogo class=" fill-current text-gray-500" />
+        <p class="invisible">a</p>
         </Link>
     </div>
 </template>
